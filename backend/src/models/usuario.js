@@ -16,15 +16,10 @@ const UsuarioSchema = new Schema(
         edad: {
             type: Number,
             required: [true, "La edad es obligatoria"],
-            min: [18, "Debes tener al menos 18 años"],
         },
         telefono: {
             type: String,
             required: [true, "El teléfono es obligatorio"],
-            match: [
-                /^\d{10,15}$/,
-                "El teléfono debe tener entre 10 y 15 dígitos",
-            ],
         },
         correo: {
             type: String,

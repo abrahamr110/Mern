@@ -3,21 +3,29 @@ import { motion } from "framer-motion";
 import { Lock, User } from "lucide-react";
 
 export default function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [correo, setCorreo] = useState("");
+    const [contrasena, setContrasena] = useState("");
     const [error, setError] = useState("");
 
     const handleLogin = async () => {
         setError("");
-        try {
-            // Simulación de autenticación (reemplazar con API real)
-            if (email === "admin@example.com" && password === "password") {
-                alert("Inicio de sesión exitoso");
-            } else {
-                throw new Error("Credenciales incorrectas");
-            }
-        } catch (err) {
-            setError(err.message);
+        const response = await fetch("http://localhost:9000/login", {
+            method: "POST",
+            body: JSON.stringify({
+                correo: correo,
+                contrasena: contrasena,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            // localStorage.setItem("token", data.token); // Guarda el token en el almacenamiento local
+            alert("Inicio de sesión exitoso");
+        } else {
+            setError("Credenciales incorrectas");
         }
     };
 
@@ -33,7 +41,7 @@ export default function Login() {
                         Iniciar Sesión
                     </h2>
                     {error && (
-                        <p className="text-red-500 text-sm text-center">
+                        <p className="text-red-500 text-sm text-center mb-2">
                             {error}
                         </p>
                     )}
@@ -43,8 +51,8 @@ export default function Login() {
                             <input
                                 type="email"
                                 placeholder="Correo electrónico"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                value={correo}
+                                onChange={(e) => setCorreo(e.target.value)}
                                 className="w-full px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             />
                         </div>
@@ -53,8 +61,8 @@ export default function Login() {
                             <input
                                 type="password"
                                 placeholder="Contraseña"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                value={contrasena}
+                                onChange={(e) => setContrasena(e.target.value)}
                                 className="w-full px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             />
                         </div>

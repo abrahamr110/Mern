@@ -138,27 +138,25 @@ usuarioCtrl.login = async (req, res) => {
         }
 
         // Buscar al usuario por correo
+        console.log(req.body);
         const usuario = await Usuario.findOne({ correo });
         if (!usuario) {
-            return res
-                .status(401)
-                .json({ error: "Correo o contraseña incorrectos" });
+            return res.status(401).json({ error: "Correo incorrecto" });
         }
+        console.log(usuario);
 
         // Comparar la contraseña proporcionada con la almacenada en la base de datos
         const isMatch = await usuario.matchPassword(contrasena);
         if (!isMatch) {
-            return res
-                .status(401)
-                .json({ error: "Correo o contraseña incorrectos" });
+            return res.status(401).json({ error: "Contraseña incorrecta" });
         }
 
         // Crear un token de autenticación (JWT)
-        const token = jwt.sign(
-            { id: usuario.id, correo: usuario.correo },
-            process.env.JWT_SECRET || "secreto_jwt", // Cambia por tu propia clave secreta
-            { expiresIn: "1h" } // Expira en una hora
-        );
+        // const token = jwt.sign(
+        //     { id: usuario.id, correo: usuario.correo },
+        //     process.env.JWT_SECRET || "secreto_jwt", // Cambia por tu propia clave secreta
+        //     { expiresIn: "1h" } // Expira en una hora
+        // );
 
         // Devolver el usuario (sin la contraseña) y el token
         res.status(200).json({
@@ -168,7 +166,7 @@ usuarioCtrl.login = async (req, res) => {
                 correo: usuario.correo,
                 contrasena: usuario.contrasena,
             },
-            token,
+            // token,
         });
     } catch (error) {
         res.status(500).json({ error: "Error interno del servidor" });

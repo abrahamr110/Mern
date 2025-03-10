@@ -8,7 +8,7 @@ export default function CrearUsuario() {
 
     useEffect(() => {
         if (id) {
-            fetch(`http://localhost:3000/api/usuario/${id}`)
+            fetch(`http://localhost9000/api/usuario/${id}`)
                 .then((res) => res.json())
                 .then((data) => setUsuario(data))
                 .catch(() => toast.error("Error al cargar el usuario"));
@@ -20,7 +20,7 @@ export default function CrearUsuario() {
         const formData = new FormData(event.target);
 
         const response = await fetch(
-            `http://localhost:3000/api/usuario/${id ? id : ""}`,
+            `http://localhost9000/api/usuario/${id ? id : ""}`,
             {
                 method: id ? "PUT" : "POST",
                 body: formData,
