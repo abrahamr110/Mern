@@ -12,10 +12,11 @@ export default function App() {
     const isLoginPage = location.pathname === "/login";
 
     return (
-        <>
-            {!isLoginPage && <Navegacion />}
-            {!isLoginPage && <Toaster />}
-            <AuthProvider>
+        <AuthProvider>
+            {/* El resto de tu aplicación va aquí */}
+            <>
+                {!isLoginPage && <Navegacion />}
+                {!isLoginPage && <Toaster />}
                 <Routes>
                     {/* Rutas accesibles sin autenticación */}
                     <Route path="/login" element={<Login />} />
@@ -30,7 +31,7 @@ export default function App() {
                         <Route path="/edit/:id" element={<CrearUsuario />} />
                     </Route>
                 </Routes>
-            </AuthProvider>
-        </>
+            </>
+        </AuthProvider>
     );
 }
