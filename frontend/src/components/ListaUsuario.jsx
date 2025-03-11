@@ -6,7 +6,7 @@ export default function ListaUsuario() {
 
     useEffect(() => {
         const fetchUsuarios = async () => {
-            const response = await fetch("http://localhost9000/api/usuario/");
+            const response = await fetch("http://localhost:9000/api/usuario/");
             const data = await response.json();
             setUsuarios(data);
         };
