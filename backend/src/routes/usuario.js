@@ -42,28 +42,6 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage, fileFilter });
 
-// Middleware de protección (Autenticación JWT)
-// const protect = (req, res, next) => {
-//     const token = req.header("Authorization")?.replace("Bearer ", "");
-//     if (!token) {
-//         return res
-//             .status(401)
-//             .json({ error: "No autorizado, no se proporcionó token" });
-//     }
-
-//     try {
-//         const decoded = jwt.verify(
-//             token,
-//             process.env.JWT_SECRET || "secreto_jwt"
-//         );
-//         req.usuario = decoded; // Añadimos el usuario decodificado al request
-//         next();
-//     } catch (error) {
-//         return res.status(401).json({ error: "Token no válido" });
-//     }
-//     return next();
-// };
-
 // Rutas para usuarios
 router
     .route("/")

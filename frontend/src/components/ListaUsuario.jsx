@@ -1,18 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ListaUsuario() {
     const [usuarios, setUsuarios] = useState([]);
-
-    useEffect(() => {
-        const fetchUsuarios = async () => {
-            const response = await fetch("http://localhost:9000/api/usuario/");
-            const data = await response.json();
-            setUsuarios(data);
-        };
-
-        fetchUsuarios();
-    }, []);
-
+    const navigate = useNavigate();
     const handleDelete = async (usuarioId) => {
         const response = await fetch(
             `http://localhost:9000/api/usuario/${usuarioId}`,
@@ -31,6 +22,20 @@ export default function ListaUsuario() {
         }
     };
 
+    const handleEdit = (usuarioId) => {
+        // Redirige a la página de edición pasando el id del usuario
+        navigate(`/edit/${usuarioId}`);
+    };
+
+    useEffect(() => {
+        const fetchUsuarios = async () => {
+            const response = await fetch("http://localhost:9000/api/usuario/");
+            const data = await response.json();
+            setUsuarios(data);
+        };
+
+        fetchUsuarios();
+    }, []);
     return (
         <main className="p-6 bg-gray-100 min-h-screen">
             <h1 className="text-3xl font-semibold text-gray-800 mb-6">
@@ -44,10 +49,11 @@ export default function ListaUsuario() {
                     >
                         <div className="relative">
                             <img
-                                src={`http://localhost:9000/uploads/${usuario.imagen}`}
-                                alt="Perfil"
+                                src={usuario.imagen}
+                                alt="x"
                                 className="w-full h-48 object-cover"
                             />
+
                             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 text-white">
                                 <h2 className="text-xl font-bold">
                                     {usuario.nombre} {usuario.apellido}
@@ -63,12 +69,12 @@ export default function ListaUsuario() {
                                 <strong>Teléfono:</strong> {usuario.telefono}
                             </p>
                             <div className="mt-4 flex flex-row justify-end space-x-4">
-                                {/* <Link
-                                    // to={`/edit/${usuario._id}`}
-                                    className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md transition-all duration-300"
+                                <button
+                                    className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md transition-all duration-300 hover:cursor-pointer"
+                                    onClick={() => handleEdit(usuario._id)}
                                 >
                                     Editar
-                                </Link> */}
+                                </button>
                                 <button
                                     className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md transition-all duration-300 hover:cursor-pointer"
                                     onClick={() => {

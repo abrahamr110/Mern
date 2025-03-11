@@ -35,7 +35,6 @@ const UsuarioSchema = new Schema(
         },
         imagen: {
             type: String,
-            default: null,
         },
     },
     {

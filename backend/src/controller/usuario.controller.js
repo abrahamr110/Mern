@@ -6,12 +6,7 @@ const fs = require("fs");
 usuarioCtrl.getAll = async (req, res) => {
     try {
         const usuarios = await Usuario.find();
-        res.status(200).json(
-            usuarios.map((usuario) => {
-                usuario.imagen = usuario.imagen;
-                return usuario;
-            })
-        );
+        res.status(200).json(usuarios);
     } catch (error) {
         res.status(500).json({ error });
     }
@@ -69,9 +64,17 @@ usuarioCtrl.create = async (req, res) => {
 usuarioCtrl.update = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nombre, apellido, edad, telefono, correo } = req.body;
+        const { nombre, apellido, edad, telefono, correo, contrasena } =
+            req.body;
 
-        if (!nombre || !apellido || !edad || !telefono || !correo) {
+        if (
+            !nombre ||
+            !apellido ||
+            !edad ||
+            !telefono ||
+            !correo ||
+            !contrasena
+        ) {
             return res.status(400).json({ error: "Faltan campos" });
         }
 

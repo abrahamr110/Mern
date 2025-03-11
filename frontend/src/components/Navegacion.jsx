@@ -15,7 +15,7 @@ export default function Navegacion() {
                 </Link>
                 <nav>
                     <ul className="flex space-x-6 items-center justify-center">
-                        <li className="text-white hover:text-gray-200 transition-colors duration-200">
+                        <li className="text-white hover:text-gray-200 cursor-pointer transition-colors duration-200">
                             <Link
                                 to="/crearUsuario"
                                 className="text-lg font-medium"
@@ -26,7 +26,7 @@ export default function Navegacion() {
                         <li className="text-white hover:text-gray-200 transition-colors duration-200">
                             <button
                                 onClick={logout}
-                                className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+                                className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 hover:cursor-pointer"
                             >
                                 Cerrar sesión
                             </button>
