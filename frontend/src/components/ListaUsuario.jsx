@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import UsuarioRow from "./UsuarioRow";
 
 export default function ListaUsuario() {
     const [usuarios, setUsuarios] = useState([]);
@@ -15,68 +14,57 @@ export default function ListaUsuario() {
     }, []);
 
     return (
-        <main className="p-6">
-            <h1 className="text-2xl font-bold mb-4">Lista de Usuarios</h1>
-            <div>
-                <div className="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
-                    <table className="w-full text-left table-auto border">
-                        <thead>
-                            <tr className="bg-gray-400">
-                                <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                    <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70"></p>
-                                </th>
-                                <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                    <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                        nombre
-                                        {/* {data.nombre} */}
-                                    </p>
-                                </th>
-                                <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                    <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                        Apellido
-                                    </p>
-                                </th>
-                                <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                    <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                        Edad
-                                    </p>
-                                </th>
-                                <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                    <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                        Correo
-                                    </p>
-                                </th>
-                                <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                    <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                        Teléfono
-                                    </p>
-                                </th>
-                                <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                    <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70"></p>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {usuarios.map((usuario) => (
-                                <UsuarioRow
-                                    key={usuario._id}
-                                    id={usuario._id}
-                                    nombre={usuario.nombre}
-                                    apellido={usuario.apellido}
-                                    edad={usuario.edad}
-                                    correo={usuario.correo}
-                                    telefono={usuario.telefono}
-                                    imagen={
-                                        usuario.imagen ||
-                                        "https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png"
+        <main className="p-6 bg-gray-100 min-h-screen">
+            <h1 className="text-3xl font-semibold text-gray-800 mb-6">
+                Lista de Usuarios
+            </h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {usuarios.map((usuario) => (
+                    <div
+                        key={usuario._id}
+                        className="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-all duration-300"
+                    >
+                        <div className="relative">
+                            <img
+                                src={usuario.imagen}
+                                alt="Perfil"
+                                className="w-full h-48 object-cover"
+                            />
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 text-white">
+                                <h2 className="text-xl font-bold">
+                                    {usuario.nombre} {usuario.apellido}
+                                </h2>
+                                <p className="text-sm">{usuario.edad} años</p>
+                            </div>
+                        </div>
+                        <div className="p-4">
+                            <p className="text-gray-700">
+                                <strong>Correo:</strong> {usuario.correo}
+                            </p>
+                            <p className="text-gray-700">
+                                <strong>Teléfono:</strong> {usuario.telefono}
+                            </p>
+                            <div className="mt-4 flex flex-row justify-end space-x-4">
+                                <button
+                                    className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md transition-all duration-300"
+                                    onClick={() =>
+                                        console.log("Acción sobre el usuario")
                                     }
-                                    usuarios={usuarios}
-                                    setUsuarios={setUsuarios}
-                                />
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                                >
+                                    Editar
+                                </button>
+                                <button
+                                    className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md transition-all duration-300"
+                                    onClick={() =>
+                                        console.log("Acción sobre el usuario")
+                                    }
+                                >
+                                    Eliminar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
         </main>
     );
