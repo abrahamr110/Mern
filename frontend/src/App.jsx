@@ -13,7 +13,6 @@ export default function App() {
 
     return (
         <AuthProvider>
-            {/* El resto de tu aplicación va aquí */}
             <>
                 {!isLoginPage && <Navegacion />}
                 {!isLoginPage && <Toaster />}

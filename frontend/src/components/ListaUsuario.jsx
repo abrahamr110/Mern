@@ -47,10 +47,10 @@ export default function ListaUsuario() {
                         key={usuario._id}
                         className="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-all duration-300"
                     >
-                        <div className="relative">
+                        <div className="relative w-full object-cover">
                             <img
                                 src={usuario.imagen}
-                                alt="x"
+                                alt="Imagen"
                                 className="w-full h-48 object-cover"
                             />
 
