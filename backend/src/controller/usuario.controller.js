@@ -131,6 +131,7 @@ usuarioCtrl.delete = async (req, res) => {
 
 usuarioCtrl.login = async (req, res) => {
     try {
+        console.log("Datos recibidos en el backend:", req.body);
         const { correo, contrasena } = req.body;
 
         if (!correo || !contrasena) {
@@ -138,37 +139,30 @@ usuarioCtrl.login = async (req, res) => {
         }
 
         // Buscar al usuario por correo
-        console.log(req.body);
         const usuario = await Usuario.findOne({ correo });
+        console.log("Usuario encontrado en la base de datos:", usuario);
+
         if (!usuario) {
             return res.status(401).json({ error: "Correo incorrecto" });
         }
-        console.log(usuario);
 
-        // Comparar la contraseña proporcionada con la almacenada en la base de datos
-        const isMatch = await usuario.matchPassword(contrasena);
+        // Comparar la contraseña
+        const isMatch = await usuario.compararContrasena(contrasena);
+        console.log("¿Contraseña correcta?:", isMatch);
+
         if (!isMatch) {
             return res.status(401).json({ error: "Contraseña incorrecta" });
         }
 
-        // Crear un token de autenticación (JWT)
-        // const token = jwt.sign(
-        //     { id: usuario.id, correo: usuario.correo },
-        //     process.env.JWT_SECRET || "secreto_jwt", // Cambia por tu propia clave secreta
-        //     { expiresIn: "1h" } // Expira en una hora
-        // );
-
-        // Devolver el usuario (sin la contraseña) y el token
         res.status(200).json({
             mensaje: "Inicio de sesión exitoso",
             usuario: {
                 id: usuario.id,
                 correo: usuario.correo,
-                contrasena: usuario.contrasena,
             },
-            // token,
         });
     } catch (error) {
+        console.error("Error en el login:", error);
         res.status(500).json({ error: "Error interno del servidor" });
     }
 };

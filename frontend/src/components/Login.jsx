@@ -9,16 +9,19 @@ export default function Login() {
 
     const handleLogin = async () => {
         setError("");
-        const response = await fetch("http://localhost:9000/login", {
-            method: "POST",
-            body: JSON.stringify({
-                correo: correo,
-                contrasena: contrasena,
-            }),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
+        const response = await fetch(
+            "http://localhost:9000/api/usuario/login",
+            {
+                method: "POST",
+                body: JSON.stringify({
+                    correo: correo,
+                    contrasena: contrasena,
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
 
         if (response.ok) {
             const data = await response.json();
