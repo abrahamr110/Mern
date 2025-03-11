@@ -42,10 +42,10 @@ export default function CrearUsuario() {
     };
 
     return (
-        <main className="flex flex-col items-center justify-center bg-gray-100 p-6">
+        <main className="flex flex-col items-center justify-center p-6">
             <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
                 <h1 className="text-2xl font-bold text-center mb-6 text-gray-700">
-                    {id ? "Editando usuario" : "Crear Usuario"}
+                    Usuario
                 </h1>
                 <form
                     className="flex flex-col gap-4"
@@ -62,7 +62,7 @@ export default function CrearUsuario() {
                             name="nombre"
                             defaultValue={usuario?.nombre || ""}
                             required
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         />
                     </div>
                     <div>
@@ -78,7 +78,7 @@ export default function CrearUsuario() {
                             name="apellido"
                             defaultValue={usuario?.apellido || ""}
                             required
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         />
                     </div>
                     <div>
@@ -92,7 +92,7 @@ export default function CrearUsuario() {
                             min={1}
                             defaultValue={usuario?.edad || ""}
                             required
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         />
                     </div>
                     <div>
@@ -105,7 +105,7 @@ export default function CrearUsuario() {
                             name="correo"
                             defaultValue={usuario?.correo || ""}
                             required
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         />
                     </div>
                     <div>
@@ -121,7 +121,7 @@ export default function CrearUsuario() {
                             name="contrasena"
                             defaultValue={usuario?.contrasena || ""}
                             required
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         />
                     </div>
                     <div>
@@ -137,7 +137,7 @@ export default function CrearUsuario() {
                             name="telefono"
                             defaultValue={usuario?.telefono || ""}
                             required
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         />
                     </div>
                     <div>
@@ -148,12 +148,12 @@ export default function CrearUsuario() {
                             type="file"
                             id="imagen"
                             name="imagen"
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         />
                     </div>
                     <button
                         type="submit"
-                        className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+                        className="w-full bg-indigo-600 text-white font-semibold py-2 rounded-lg hover:bg-indigo-700 transition duration-300"
                     >
                         {id ? "Actualizar" : "Crear"}
                     </button>

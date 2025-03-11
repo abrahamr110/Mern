@@ -63,16 +63,14 @@ export default function ListaUsuario() {
                                 <strong>Teléfono:</strong> {usuario.telefono}
                             </p>
                             <div className="mt-4 flex flex-row justify-end space-x-4">
-                                <button
+                                {/* <Link
+                                    // to={`/edit/${usuario._id}`}
                                     className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md transition-all duration-300"
-                                    onClick={() =>
-                                        console.log("Acción sobre el usuario")
-                                    }
                                 >
                                     Editar
-                                </button>
+                                </Link> */}
                                 <button
-                                    className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md transition-all duration-300"
+                                    className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md transition-all duration-300 hover:cursor-pointer"
                                     onClick={() => {
                                         handleDelete(usuario._id);
                                     }}

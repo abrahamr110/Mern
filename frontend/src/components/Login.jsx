@@ -30,7 +30,6 @@ export default function Login() {
         if (response.ok) {
             const data = await response.json();
             login(data); // Guardar usuario en el contexto
-            alert("Inicio de sesión exitoso");
             navigate("/");
         } else {
             setError("Credenciales incorrectas");
