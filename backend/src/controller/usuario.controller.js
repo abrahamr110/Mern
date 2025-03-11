@@ -8,9 +8,7 @@ usuarioCtrl.getAll = async (req, res) => {
         const usuarios = await Usuario.find();
         res.status(200).json(
             usuarios.map((usuario) => {
-                usuario.imagen = usuario.imagen
-                    ? usuario.imagen
-                    : "noImagen.png";
+                usuario.imagen = usuario.imagen;
                 return usuario;
             })
         );

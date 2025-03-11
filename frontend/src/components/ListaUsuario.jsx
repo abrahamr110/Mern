@@ -13,6 +13,24 @@ export default function ListaUsuario() {
         fetchUsuarios();
     }, []);
 
+    const handleDelete = async (usuarioId) => {
+        const response = await fetch(
+            `http://localhost:9000/api/usuario/${usuarioId}`,
+            {
+                method: "DELETE",
+            }
+        );
+
+        if (response.ok) {
+            setUsuarios(
+                usuarios.filter((usuario) => usuario._id !== usuarioId)
+            );
+            console.log("Usuario eliminado");
+        } else {
+            console.log("Error al eliminar usuario");
+        }
+    };
+
     return (
         <main className="p-6 bg-gray-100 min-h-screen">
             <h1 className="text-3xl font-semibold text-gray-800 mb-6">
@@ -26,7 +44,7 @@ export default function ListaUsuario() {
                     >
                         <div className="relative">
                             <img
-                                src={usuario.imagen}
+                                src={`http://localhost:9000/uploads/${usuario.imagen}`}
                                 alt="Perfil"
                                 className="w-full h-48 object-cover"
                             />
@@ -55,9 +73,9 @@ export default function ListaUsuario() {
                                 </button>
                                 <button
                                     className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md transition-all duration-300"
-                                    onClick={() =>
-                                        console.log("Acción sobre el usuario")
-                                    }
+                                    onClick={() => {
+                                        handleDelete(usuario._id);
+                                    }}
                                 >
                                     Eliminar
                                 </button>
