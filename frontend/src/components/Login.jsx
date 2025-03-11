@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Lock, User } from "lucide-react";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Login() {
     const [correo, setCorreo] = useState("");
     const [contrasena, setContrasena] = useState("");
     const [error, setError] = useState("");
+    const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
 
     const handleLogin = async () => {
         setError("");
@@ -25,8 +29,9 @@ export default function Login() {
 
         if (response.ok) {
             const data = await response.json();
-            // localStorage.setItem("token", data.token); // Guarda el token en el almacenamiento local
+            login(data); // Guardar usuario en el contexto
             alert("Inicio de sesión exitoso");
+            navigate("/");
         } else {
             setError("Credenciales incorrectas");
         }
